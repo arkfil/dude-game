@@ -38,11 +38,10 @@ private:
 	void UpdateModel();
 	/********************************/
 	/*  User Functions              */
-	void DrawFace(int x, int y );
-	void DrawPoo(int x, int y);
 
-	void DrawTitleScreen(int x, int y);
-	void DrawGameOver(int x, int y);
+
+	void DrawTitleScreen(const int x, const int y);
+	void DrawGameOver(const int x, const int y);
 
 	
 	/********************************/

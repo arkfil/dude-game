@@ -1,4 +1,6 @@
 #pragma once
+#include "Graphics.h"
+
 class Dude
 {
 public:
@@ -12,5 +14,7 @@ public:
 	static constexpr int height = 20;
 
 	void clampToScreen();
+
+	void Draw(Graphics &gfx) const;
 };
 

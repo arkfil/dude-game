@@ -1,4 +1,8 @@
 #pragma once
+#include "Dude.h"
+#include "Graphics.h"
+
+
 class Poo
 {
 public:
@@ -6,7 +10,8 @@ public:
 	~Poo();
 
 	void Update();
-	void ProcessConsumption(int dudeX, int dudeY, int dudeWidth, int dudeHeight);
+	void Draw(Graphics &gfx) const;
+	void ProcessConsumption(const Dude &dude);
 
 
 // function

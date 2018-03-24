@@ -25,6 +25,7 @@
 #include "Graphics.h"
 #include "Poo.h"
 #include "Dude.h"
+#include <random>
 
 class Game
 {
@@ -51,14 +52,23 @@ private:
 	/********************************/
 	/*  User Variables              */
 
-	Dude dude;
-
-	bool isStarted = false;
-
-
+	std::random_device rd;
+	std::mt19937 rgn;
+	std::uniform_int_distribution<int> xDist;
+	std::uniform_int_distribution<int> yDist;
 	Poo poo0;
 	Poo poo1;
-	Poo poo2;
+	Poo poo2;	
+	Poo poo3;
+	Poo poo4;
+	Poo poo5;
+	Poo poo6;
+	Poo poo7;
+	Poo poo8;
+
+	Dude dude;
+	bool isStarted = false;
+	
 
 	/********************************/
 };

@@ -6,12 +6,16 @@ Dude::Dude()
 {
 }
 
+Dude::Dude(const int p_x, const int p_y): x(p_x), y(p_y)
+{
+}
+
 
 Dude::~Dude()
 {
 }
 
-void Dude::clampToScreen()
+void Dude::ClampToScreen()
 {
 	const int right = x + width;
 	if (x < 0) {
@@ -348,4 +352,21 @@ void Dude::Draw(Graphics &gfx) const
 	gfx.PutPixel(10 + x, 19 + y, 0, 0, 0);
 	gfx.PutPixel(11 + x, 19 + y, 0, 0, 0);
 	gfx.PutPixel(12 + x, 19 + y, 0, 0, 0);
+}
+
+void Dude::Update(const bool up, const bool down, const bool left, const bool right)
+{
+	if (up) {
+		y -= speed;
+	}
+	if (down) {
+		y += speed;
+	}
+	if (left) {
+		x -= speed;
+	}
+	if (right) {
+		x += speed;
+	}
+
 }

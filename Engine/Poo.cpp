@@ -7,6 +7,10 @@ Poo::Poo()
 {
 }
 
+Poo::Poo(int p_x, int p_y, int p_vx, int p_vy): x(p_x),y(p_y),vx(p_vx), vy(p_vy)
+{
+}
+
 
 Poo::~Poo()
 {
@@ -267,8 +271,8 @@ void Poo::ProcessConsumption(const Dude &dude)
 	const int right0 = dude.x + dude.width;
 	const int bottom0 = dude.y + dude.height;
 
-	const int right1 = dude.x + dude.width;
-	const int bottom1 = dude.y + dude.height;
+	const int right1 = x + width;
+	const int bottom1 = y + height;
 
 
 	if (right0 >= x
@@ -279,4 +283,9 @@ void Poo::ProcessConsumption(const Dude &dude)
 		isEaten = true;
 	}
 
+}
+
+bool Poo::IsEaten()
+{
+	return isEaten;
 }

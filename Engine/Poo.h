@@ -7,13 +7,14 @@ class Poo
 {
 public:
 	Poo();
-	Poo(int x, int y, int sp_vx, int p_vy);
+	void Init(int x, int y, int sp_vx, int p_vy);
+
 	~Poo();
 
 	void Update();
 	void Draw(Graphics &gfx) const;
 	void ProcessConsumption(const Dude &dude);
-	bool IsEaten();
+	bool IsEaten() const;
 
 private:
 	int x;
@@ -24,6 +25,7 @@ private:
 	static constexpr int height = 24;
 	int isEaten = false;
 
+	bool isInitialized = false;
 
 
 

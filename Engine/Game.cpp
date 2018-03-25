@@ -22,26 +22,20 @@
 #include "Game.h"
 
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd ),
-	rgn( rd() ),
-	xDist(0,770),
-	yDist(0,570),
-	poo0(xDist(rgn), yDist(rgn),1,1),
-	poo1(xDist(rgn), yDist(rgn),1,-1),
-	poo2(xDist(rgn), yDist(rgn),1,-1),
-	poo3(xDist(rgn), yDist(rgn), 1, -1),
-	poo4(xDist(rgn), yDist(rgn), -1, 1),
-	poo5(xDist(rgn), yDist(rgn), 1, -1),
-	poo6(xDist(rgn), yDist(rgn), -1, 1),
-	poo7(xDist(rgn), yDist(rgn), 1, -1),
-	poo8(xDist(rgn), yDist(rgn), 1, 1),
-	dude(200,200)
+	wnd(wnd),
+	gfx(wnd),
+	rgn(rd()),
+	xDist(0, 770),
+	yDist(0, 570),
+	dude(200, 200)
 {
-
-
+	for (int i = 0; i < nPoo; ++i) {
+		std::uniform_int_distribution<int> vxDist(-1, 1);
+		std::uniform_int_distribution<int> vyDist(-1, 1);
+		poos[i].Init(xDist(rgn), yDist(rgn), vxDist(rgn), vyDist(rgn));
+	}
 
 }
 
@@ -60,30 +54,12 @@ void Game::UpdateModel()
 		dude.Update(wnd.kbd.KeyIsPressed(VK_UP), wnd.kbd.KeyIsPressed(VK_DOWN),
 			wnd.kbd.KeyIsPressed(VK_LEFT), wnd.kbd.KeyIsPressed(VK_RIGHT));
 
-
-		poo0.ProcessConsumption(dude);
-		poo1.ProcessConsumption(dude);
-		poo2.ProcessConsumption(dude);
-		poo3.ProcessConsumption(dude);
-		poo4.ProcessConsumption(dude);
-		poo5.ProcessConsumption(dude);
-		poo6.ProcessConsumption(dude);
-		poo7.ProcessConsumption(dude);
-		poo8.ProcessConsumption(dude);
-
-
+		for (int i = 0; i < nPoo; ++i) {
+			poos[i].ProcessConsumption(dude);
+			poos[i].Update();
+		}
 
 		dude.ClampToScreen();
-
-		poo0.Update();
-		poo1.Update();
-		poo2.Update();
-		poo3.Update();
-		poo4.Update();
-		poo5.Update();
-		poo6.Update();
-		poo7.Update();
-		poo8.Update();
 
 	}
 	else {
@@ -28454,32 +28430,22 @@ void Game::ComposeFrame()
 		DrawTitleScreen(325,211);
 	}
 	else {
-		if (poo0.IsEaten() && poo1.IsEaten() && poo2.IsEaten(),
-			poo3.IsEaten() && poo4.IsEaten() && poo5.IsEaten(),
-			poo6.IsEaten() && poo7.IsEaten() && poo8.IsEaten()
-			)
-			DrawGameOver(358, 268);
+		bool allEaten = true;
+
+		for (int i = 0; i < nPoo; ++i) {
+			allEaten = allEaten && poos[i].IsEaten();
+
+			if (!poos[i].IsEaten())
+				poos[i].Draw(gfx);
+		}
+
+
+		if (allEaten) DrawGameOver(358, 268);
 
 		dude.Draw(gfx);
 
-		if (!poo0.IsEaten())
-			poo0.Draw(gfx);
-		if (!poo1.IsEaten())
-			poo1.Draw(gfx);
-		if (!poo2.IsEaten())
-			poo2.Draw(gfx);
-		if (!poo3.IsEaten())
-			poo3.Draw(gfx);
-		if (!poo4.IsEaten())
-			poo4.Draw(gfx);
-		if (!poo5.IsEaten())
-			poo5.Draw(gfx);
-		if (!poo6.IsEaten())
-			poo6.Draw(gfx);
-		if (!poo7.IsEaten())
-			poo7.Draw(gfx);
-		if (!poo8.IsEaten())
-			poo8.Draw(gfx);
+
+	
 
 	}
 }

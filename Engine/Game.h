@@ -37,6 +37,8 @@ public:
 private:
 	void ComposeFrame();
 	void UpdateModel();
+		
+
 	/********************************/
 	/*  User Functions              */
 
@@ -56,16 +58,9 @@ private:
 	std::mt19937 rgn;
 	std::uniform_int_distribution<int> xDist;
 	std::uniform_int_distribution<int> yDist;
-	Poo poo0;
-	Poo poo1;
-	Poo poo2;	
-	Poo poo3;
-	Poo poo4;
-	Poo poo5;
-	Poo poo6;
-	Poo poo7;
-	Poo poo8;
-
+	static constexpr int nPoo = 15;
+	Poo poos[nPoo];
+	
 	Dude dude;
 	bool isStarted = false;
 	

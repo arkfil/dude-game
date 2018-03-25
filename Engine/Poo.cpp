@@ -1,14 +1,20 @@
 #include "Poo.h"
 
 #include "Graphics.h"
-
+#include <assert.h>
 
 Poo::Poo()
 {
 }
 
-Poo::Poo(int p_x, int p_y, int p_vx, int p_vy): x(p_x),y(p_y),vx(p_vx), vy(p_vy)
+void Poo::Init(int p_x, int p_y, int p_vx, int p_vy)
 {
+	assert(!isInitialized);
+	x = p_x;
+	y = p_y;
+	vx = p_vx;
+	vy = p_vy;
+	isInitialized = true;
 }
 
 
@@ -17,6 +23,7 @@ Poo::~Poo()
 }
 
 void Poo::Update() {
+	assert(isInitialized);
 	x += vx;
 	y += vy;
 
@@ -32,6 +39,8 @@ void Poo::Update() {
 
 void Poo::Draw( Graphics &gfx) const
 {
+	assert(isInitialized);
+
 	gfx.PutPixel(14 + x, 0 + y, 138, 77, 0);
 	gfx.PutPixel(7 + x, 1 + y, 138, 77, 0);
 	gfx.PutPixel(13 + x, 1 + y, 138, 77, 0);
@@ -268,6 +277,8 @@ void Poo::Draw( Graphics &gfx) const
 
 void Poo::ProcessConsumption(const Dude &dude)
 {
+	assert(isInitialized);
+
 	const int right0 = dude.x + dude.width;
 	const int bottom0 = dude.y + dude.height;
 
@@ -285,7 +296,9 @@ void Poo::ProcessConsumption(const Dude &dude)
 
 }
 
-bool Poo::IsEaten()
+bool Poo::IsEaten() const
 {
+	assert(isInitialized);
+
 	return isEaten;
 }
